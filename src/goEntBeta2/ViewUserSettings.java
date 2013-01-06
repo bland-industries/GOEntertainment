@@ -1,7 +1,14 @@
+/*****************************************************************
+This displays the lists passed into the user side of the GUI.
+
+@author Nick Carter, Tyler Hutek, Tyler McCarthy, Thomas Verstraete
+@version Fall 2012
+ *****************************************************************/
 package goEntBeta2;
 
 import java.util.ArrayList;
 
+import javax.swing.AbstractListModel;
 import javax.swing.JPanel;
 
 public class ViewUserSettings extends JPanel implements View  {
@@ -20,7 +27,7 @@ public class ViewUserSettings extends JPanel implements View  {
 	
 	*****************************************************************/
 	@Override
-	public void showAccount(Account account) {
+	public void showItem (Object obj) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -36,7 +43,7 @@ public class ViewUserSettings extends JPanel implements View  {
 	
 	*****************************************************************/
 	@Override
-	public void showList(RentalList list) {
+	public void showList(AbstractListModel list) {
 		// TODO Auto-generated method stub
 		
 	}

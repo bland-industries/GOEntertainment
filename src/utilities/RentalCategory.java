@@ -7,19 +7,7 @@ Enum for the different categories of the rental objects.
 package utilities;
 
 public enum RentalCategory {
-	ACTION, HORROR, COMEDY, DRAMA, ANIMATION, CHILDRENS, 
-	
-	WII, XBOX360, PS3;
-	
-	private boolean movie;
-	
-	private RentalCategory () {
-		
-	}
-	
-	public boolean isMovie(RentalCategory type ) {
-		return false;
-		
-	}
-
+	NONE, ACTION, ADVENTURE, ADULT, ANIMATION, COMEDY, CRIME, 
+	DOCUMENTARY, DRAMA, FANTASY, FAMILY, FILMNOIR, HORROR, MUSICAL, 
+	MYSTERY, ROMANCE, SCIFI, SHORT, THRILLER, WAR, WESTERN;
 }

@@ -1,55 +1,36 @@
+/*****************************************************************
+Unimplemented class. 
+
+@author Nick Carter, Tyler Hutek, Tyler McCarthy, Thomas Verstraete
+@version Fall 2012
+ *****************************************************************/
 package goEntBeta2;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
+import javax.swing.*;
 
-import javax.swing.JList;
-import javax.swing.JPanel;
-
-public class ViewAdminAccounts extends JPanel implements View {
-	
-	/***/
-	private JPanel actionPanel;
-	
-	/***/
-	private ArrayList<GoButton> buttons;
+public class ViewAdminAccounts extends JPanel{
 
 	/**This is the list to display in the View*/
 	JList list;
 	
-	
-
-	/*****************************************************************
-	
-	*****************************************************************/
-	@Override
-	public void showAccount(Account account) {
-		// TODO Auto-generated method stub
-		
-	}
+	/**Contains buttons that act upon the JScrollPane*/
+	JPanel subButtonPanel;
 	
 	/*****************************************************************
-	
+	constructor creates a JList from accounts & places in JScrollPane
 	*****************************************************************/
-	public void showAccounts (ArrayList<Account> accounts) {
+	public ViewAdminAccounts(AbstractListModel accounts){
 		
+		list = new JList(accounts);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.setSelectedIndex(0);
+        
+        JScrollPane listPane = new JScrollPane(list);
+        
+	    this.setLayout(new BorderLayout());
+	    this.add(listPane, BorderLayout.CENTER);
+        
 	}
-	
-	/*****************************************************************
-	
-	*****************************************************************/
-	@Override
-	public void showList(RentalList list) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/*****************************************************************
-	
-	*****************************************************************/
-	private void setButtons() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 }

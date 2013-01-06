@@ -8,8 +8,8 @@ This class is used to maintain consistency in the style of
 package utilities;
 
 import goEntBeta2.DVD;
-import goEntBeta2.TVEpisode;
-import goEntBeta2.VideoGame;
+import goEntBeta2.TVSeason;
+
 
 import java.awt.Color;
 import java.awt.Component;
@@ -20,12 +20,11 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 
-import xtra.TestRental;
+
 
 public class ProgramStyle {
 
@@ -65,7 +64,11 @@ public class ProgramStyle {
 	}
 
 	public static Dimension titlePanelSize () {
-		return new Dimension(windowSize().width - buttonPanelSize().width, 150);
+		return new Dimension(windowSize().width - buttonPanelSize().width, 75);
+	}
+	
+	public static Dimension infoPanelSize () {
+		return new Dimension(windowSize().width - buttonPanelSize().width,300);
 	}
 
 	public static Dimension actionPanelSize () {
@@ -172,7 +175,7 @@ public class ProgramStyle {
 	/*****************************************************************
 
 	 *****************************************************************/
-	public Dimension getStringSize (Graphics page, String title, int fontSize) {
+	public static Dimension getStringSize (Graphics page, String title, int fontSize) {
 
 		FontMetrics fm = page.getFontMetrics(ProgramStyle.getFont(fontSize));
 		Dimension stringSize = new Dimension(fm.stringWidth(title), 
@@ -228,9 +231,9 @@ public class ProgramStyle {
 					setPreferredSize(new Dimension(600, 140));
 
 					System.out.println ("Renderer");
-					TestRental rental = ((TestRental) value);
+					Rental rental = ((Rental) value);
 
-					g.setColor(isSelected ? Color.WHITE : 
+					g.setColor(isSelected ? ProgramStyle.GREENSIGN : 
 						ProgramStyle.GREENSIGN);
 					g.fillRect(0, 0, getWidth(), getHeight());
 
@@ -276,10 +279,15 @@ public class ProgramStyle {
 					//us this as a JPanel to add anything wanted.
 					//setPreferredSize(getPreferredSize());
 
-					Rental rental = ((Rental) value);
+					Rental rental;
+					
+					if (value instanceof Rented)
+						 rental = (((Rented) value).rental);
+					else
+						rental = ((Rental) value);
 
 					//sets the background coloer of the panel
-					g.setColor(isSelected ? Color.WHITE : 
+					g.setColor(isSelected ? ProgramStyle.GREENSIGN : 
 						ProgramStyle.GREENSIGN);
 					g.fillRect(0, 0, getWidth(), getHeight());
 
@@ -288,20 +296,25 @@ public class ProgramStyle {
 					if (rental instanceof DVD) {
 						image = new ImageIcon("Images/CatImages/MovieCat.png");
 						image.paintIcon(this, g, 5, 5);
+						
+						g.setColor(WHITESIGN);
+						g.setFont(ProgramStyle.getFont(20));
+						g.drawString(rental.getTitle(), 130, 25);
 					}
 
-					if (rental instanceof TVEpisode) {
+					if (rental instanceof TVSeason) {
 						image = new ImageIcon("Images/CatImages/TVCat.png");
 						image.paintIcon(this, g, 5, 5);
+						
+						g.setColor(WHITESIGN);
+						g.setFont(ProgramStyle.getFont(20));
+						g.drawString(rental.getTitle(), 130, 25);
 					}
 
-					if (rental instanceof VideoGame) {
-						image = new ImageIcon("Images/CatImages/GameCat.png");
-						image.paintIcon(this, g, 5, 5);
-					}
 
 					g.setColor(WHITESIGN);
-					g.drawString(rental.getTitle(), 130, 60);
+					g.setFont(ProgramStyle.getFont(20));
+					g.drawString(rental.getTitle(), 130, 25);
 
 				}
 				

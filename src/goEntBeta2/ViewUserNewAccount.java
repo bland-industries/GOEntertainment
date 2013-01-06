@@ -1,3 +1,9 @@
+/*****************************************************************
+new account dialog
+
+@author Nick Carter, Tyler Hutek, Tyler McCarthy, Thomas Verstraete
+@version Fall 2012
+ *****************************************************************/
 package goEntBeta2;
 
 import java.awt.BorderLayout;
@@ -19,7 +25,7 @@ import javax.swing.JTextField;
 
 import utilities.LoginButtonEnum;
 import utilities.ProgramStyle;
-import xtra.TestAccount;
+
 
 public class ViewUserNewAccount extends JDialog{
 
@@ -91,18 +97,18 @@ public class ViewUserNewAccount extends JDialog{
 	 *****************************************************************/
 	public boolean checkInput() {
 		boolean[] checks = new boolean[4];
-		
+
 		//checks each if they are invalid and changes the label
 		checks[0] = checkPassword();
 		checks[1] = checkEMail();
 		checks[2] = checkStateCode();
 		checks[3] = checkZipCode();
-		
+
 		//if one is invalid it will return false;
 		for (boolean check: checks) 
 			if (!check)
 				return false;
-		
+
 		//if all are valid returns true
 		return true;
 
@@ -221,7 +227,7 @@ public class ViewUserNewAccount extends JDialog{
 		}
 
 	}
-	
+
 	/*****************************************************************
 
 	 *****************************************************************/
@@ -229,7 +235,7 @@ public class ViewUserNewAccount extends JDialog{
 		eMailLabel.setForeground(Color.RED);
 		eMailLabel.setText("ACCOUNT EXISTS WITH THIS EMAIL:");
 	}
-	
+
 	/*****************************************************************
 
 	 *****************************************************************/
@@ -241,27 +247,28 @@ public class ViewUserNewAccount extends JDialog{
 
 	 *****************************************************************/
 
-	
+
 	/*****************************************************************
 
 	 *****************************************************************/
 	public Account getNewAccount () {
 		Account account = new Account();
-		
+		account.newAccount();
+
 		//self explanitory setting of the Account variables.
 		account.seteMail(eMail.getText().toLowerCase());
 		account.setFirstName(firstName.getText());
 		account.setLastName(lastName.getText());
 		account.setPassword(password1.getText());
-		
-		//set up the address to be saved as one long string
-		String adr = address1.getText() + "*";
-		adr = adr + address2.getText() + "*";
-		adr = adr + city.getText() + "*";
-		adr = adr + state.getText() + "*";
-		adr = adr + zipCode.getText() + "*";
+
+		///set up the address to be saved as one long string
+		String adr = address1.getText() + "ZzZ";
+		adr = adr + address2.getText() + "ZzZ";
+		adr = adr + city.getText() + "ZzZ";
+		adr = adr + state.getText() + "ZzZ";
+		adr = adr + zipCode.getText() + "ZzZ";
 		account.setAddress(adr);
-		
+
 		return account;
 	}
 
@@ -306,6 +313,8 @@ public class ViewUserNewAccount extends JDialog{
 			welcomeJLabel.setFont(ProgramStyle.getFont(40));
 			welcomeJLabel.setForeground(ProgramStyle.WHITESIGN);
 			welcomeJLabel.setOpaque(false);
+			welcomeJLabel.setEditable(false);
+			welcomeJLabel.setHighlighter(null);
 			welcomeJLabel.setWrapStyleWord(true);  
 			welcomeJLabel.setLineWrap(true);
 			textPanel.add(welcomeJLabel, BorderLayout.NORTH);
@@ -314,6 +323,8 @@ public class ViewUserNewAccount extends JDialog{
 			textJLabel.setFont(ProgramStyle.getFont(12));
 			textJLabel.setForeground(ProgramStyle.WHITESIGN);
 			textJLabel.setOpaque(false);
+			welcomeJLabel.setEditable(false);
+			welcomeJLabel.setHighlighter(null);
 			textJLabel.setWrapStyleWord(true);  
 			textJLabel.setLineWrap(true);
 			textPanel.add(textJLabel, BorderLayout.SOUTH);

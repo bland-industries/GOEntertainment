@@ -1,63 +1,58 @@
 /****************************************************************
-
-
+Shows the main login screen for the happy patrons to sign into
 
 @author Nick Carter, Tyler Hutek, Tyler McCarthy, Thomas Verstraete
 @version Fall 2012
  *****************************************************************/
-
-/****************************************************************
-Notes:
-
-need a spot to click for a new account.
- *****************************************************************/
 package goEntBeta2;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.TextEvent;
-import java.awt.event.TextListener;
 
-import javax.swing.BorderFactory;
+import java.awt.Dimension;
+
+import java.awt.Graphics;
+
+
+import javax.swing.AbstractListModel;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.Timer;
 
 import utilities.LoginButtonEnum;
-import utilities.ProgButton;
 import utilities.ProgramStyle;
-import xtra.TestAccount;
+
 
 public class ViewLogin extends JPanel implements View{
 
-
+	/**The light icon in the back*/
 	private ImageIcon light;
 
+	/**The width of the window*/
 	private int windowWidth;
 
+	/**The error message*/
 	private JLabel message;
+	
+	/**The username field*/
 	private JTextField userNameField;
+	
+	/**The password field*/
 	private JPasswordField passwordField;
 	
+	/**The username label*/
 	private String userName;
+	
+	/**The password label*/
 	private String password;
 	
-	ViewUserNewAccount newAccount;
+	/**A new account for the new user*/
+	private ViewUserNewAccount newAccount;
 
+	/**the size of the text area*/
 	private final Dimension TEXTAREA = new Dimension (225,200);
+	
+	/**distance of the text area from the top of the panel*/
 	private final int TEXTFROMTOP = 350;
 
 
@@ -90,7 +85,7 @@ public class ViewLogin extends JPanel implements View{
 	}
 
 	/*****************************************************************
-
+	 * creates the text area
 	 *****************************************************************/
 	private void setLogin () {
 
@@ -104,15 +99,12 @@ public class ViewLogin extends JPanel implements View{
 		JLabel userLabel = new JLabel("USER NAME");
 		userLabel.setFont(ProgramStyle.getFont(9));
 		
-		userNameField = new JTextField ("thomas@bwata.com", 15);							//need to change set word
-		//userNameField.addActionListener(new FieldListener());
+		userNameField = new JTextField ("", 15);							//need to change set word
 		
 		JLabel passLabel = new JLabel("PASSWORD");
 		passLabel.setFont(ProgramStyle.getFont(9));
 		
-		passwordField = new JPasswordField ("password", 15);						//need to change set word
-		//passwordField.addActionListener(new FieldListener());
-
+		passwordField = new JPasswordField ("", 15);						//need to change set word
 
 		GoButton loginButton = new GoButton (LoginButtonEnum.LOGIN);
 		loginButton.useImageForButton();
@@ -139,7 +131,8 @@ public class ViewLogin extends JPanel implements View{
 	}
 
 	/*****************************************************************
-	
+	 * Changes the background image to red to show incorrect username
+	 * or password.
 	 *****************************************************************/
 	public void failedLogin () {
 		//this sets the login screen to change if the wrong username or password is entered
@@ -151,14 +144,14 @@ public class ViewLogin extends JPanel implements View{
 	}
 	
 	/*****************************************************************
-
+	 * Gets the typed username
 	 *****************************************************************/
 	public String getUserName() {
 		return userNameField.getText();
 	}
 	
 	/*****************************************************************
-
+	 * Gets the typed password
 	 *****************************************************************/
 	@SuppressWarnings("deprecation")
 	public String getPassword() {
@@ -174,13 +167,7 @@ public class ViewLogin extends JPanel implements View{
 	 *****************************************************************/
 
 	@Override
-	public void showList(RentalList list) {
-		// TODO Auto-generated method stub
-
-	}
+	public void showItem (Object obj) {}
 	@Override
-	public void showAccount(Account account) {
-		// TODO Auto-generated method stub
-
-	}
+	public void showList(AbstractListModel list) {}
 }

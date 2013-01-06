@@ -16,7 +16,19 @@ public class Ignition {
 	 */
 	public static void main(String[] cheese) {
 		
-		Controller control = new Controller();
+		Controller control;
+		
+		try{
+			
+		control = new Controller();
+		
+		}
+		catch (Exception e) {
+			
+		control = new Controller();
+		e.printStackTrace();
+		
+		}
 	}
 
 }

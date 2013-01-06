@@ -3,8 +3,8 @@ package utilities;
 public enum ContentRating {
 	
 	/**Movie Ratings*/
-	G,PG,PG13,R,NC17,
+	G,PG,PG13,R,NC17,NR,
 	
-	/**Game Ratings*/
-	EC,E,E10,T,M,AO,RP,NR
+	/**TV Ratings*/
+	TVY,TVY7,TVG,TVPG,TV14,TVMA,FV,D,LS,V
 }

@@ -1,4 +1,12 @@
+/****************************************************************
+the default view when logged in
+
+@author Nick Carter, Tyler Hutek, Tyler McCarthy, Thomas Verstraete
+@version Fall 2012
+ *****************************************************************/
 package goEntBeta2;
+
+import goEntBeta2.ViewUserList.ListClickListener;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -6,14 +14,20 @@ import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.AbstractListModel;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ListModel;
 import javax.swing.ScrollPaneConstants;
 
 import utilities.*;
@@ -22,16 +36,20 @@ import utilities.ProgramStyle;
 
 public class ViewUserHome extends JPanel implements View {
 
-	RentalList rentalHistory;
+	AbstractListModel itemsList;
 
 	JList list;
 
+	ActionListener listener;
+
 
 	/*****************************************************************
-
+	 * constructor
 	 *****************************************************************/
-	public ViewUserHome (RentalList rentalHistory) {
-		this.rentalHistory = rentalHistory;
+	public ViewUserHome (AbstractListModel itemsList) {
+		this.itemsList = itemsList;
+
+		listener = Listeners.getListener("ListListener");
 
 		//sets the preferences for this JPanel
 		this.setMaximumSize(ProgramStyle.actionPanelSize());
@@ -45,7 +63,7 @@ public class ViewUserHome extends JPanel implements View {
 	}
 
 	/*****************************************************************
-
+	 * sets up the title panel and populates it
 	 *****************************************************************/
 	private JPanel setUpTitlePanel () {
 		JPanel panel = new JPanel();
@@ -72,7 +90,7 @@ public class ViewUserHome extends JPanel implements View {
 
 
 	/*****************************************************************
-
+	 * sets up action panel and populates it
 	 *****************************************************************/
 	private JPanel setUpActionPanel () {
 
@@ -83,7 +101,8 @@ public class ViewUserHome extends JPanel implements View {
 		actionPanel.setOpaque(false);
 
 		//Sets up the JList to display the items
-		list = new JList(rentalHistory);
+		list = new JList(itemsList);
+		list.addMouseListener(new HomeClickListener());
 		list.setCellRenderer(ProgramStyle.getUserRenderer());
 		list.setOpaque(false);
 
@@ -101,7 +120,7 @@ public class ViewUserHome extends JPanel implements View {
 
 
 	/*****************************************************************
-
+	 * paints graphics to use
 	 *****************************************************************/
 	public void paintComponent (Graphics page) {
 
@@ -112,7 +131,7 @@ public class ViewUserHome extends JPanel implements View {
 	}
 
 	/*****************************************************************
-
+	 * determines the location of the string for printing
 	 *****************************************************************/
 	private Dimension getLocation (Graphics page, String title, int fontSize) {
 		FontMetrics fm = page.getFontMetrics(ProgramStyle.getFont(fontSize));
@@ -122,18 +141,27 @@ public class ViewUserHome extends JPanel implements View {
 		return stringSize;
 	}
 
-
-
+	@Override
+	public void showList(AbstractListModel list) {}
 
 	@Override
-	public void showList(RentalList list) {
-		//this needs to show the rentals to be returned
+	public void showItem (Object obj) {}
 
+	/****************************************************************
+	Listens for the double click on the list
+	 *****************************************************************/
+	public class HomeClickListener extends MouseAdapter {
+
+		public void mouseClicked(MouseEvent e){
+			if(e.getClickCount() == 2){
+				int index = list.locationToIndex(e.getPoint());
+				ListModel dlm = list.getModel();
+				Object item = dlm.getElementAt(index);;
+				list.ensureIndexIsVisible(index);
+				System.out.println("Double clicked on " + item);
+				listener.actionPerformed(new ActionEvent(item, index, ""));
+
+			}
+		}
 	}
-
-
-
-
-	@Override
-	public void showAccount(Account account) {}
 }

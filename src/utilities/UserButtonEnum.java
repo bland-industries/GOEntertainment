@@ -14,26 +14,59 @@ import javax.swing.ImageIcon;
 
 public enum UserButtonEnum implements ProgButton{
 	
-	/***/
-	SEARCH_LIST ("Search Account"), 
+	/**This is to show the users account history*/
+	HISTORY ("History"), 
 	
 	/***/
-	SEARCH_MOVIES ("Search Movies"),
+	FAVORITES ("Favorites"),
+	
+	/***/
+	RENTLIST ("Rent List"),
+	
+	/**This is to display the search dialog box.*/
+	SEARCH_LIST ("Search"),
+	
+	/***/
+	SEARCH ("Search"),
+	
+	/***/
+	LIBRARY ("Library"),
 	
 	/***/
 	VIEW_ACCOUNT ("View Account"),
 
 	/***/
-	CATEGORIES ("Categories"),
+	CHECKED_OUT ("Return Items"),
 	
 	/***/
 	LOGOUT ("Logout"),
 	
 	/***/
+	SAVE_ACCOUNT ("Save Changes"),
+	
+	//these are used in the rental dialog screen
+	
+	/***/
 	RENT ("Rent"),
 	
 	/***/
-	RETURN ("Return");
+	RETURN ("Return"),
+	
+	/***/
+	ADD_FAVORITE ("+ Favorite"),
+	
+	/***/
+	REMOVE_FAVORITE ("- Favorite"),
+	
+	/***/
+	ADD_RENTLIST ("+ RENT LIST"),
+	
+	/***/
+	REMOVE_RENTLIST ("- RENT LIST"),
+	
+	//These are for the checkout process
+	PAY ("Pay");
+	
 	
 	/***/
 	private final String title;
